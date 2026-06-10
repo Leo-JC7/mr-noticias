@@ -74,6 +74,19 @@
       "bloquear_titulo": [
         "show", "shows", "stand-up", "comedy", "festival", "festa", "balada"
       ]
+    },
+    {
+      "id": "normas-inss",
+      "titulo": "Portarias e Instruções Normativas",
+      "tipo": "normas",
+      "paginas_oficiais": [
+        "https://www.gov.br/inss/pt-br/centrais-de-conteudo/legislacao/portarias",
+        "https://www.gov.br/inss/pt-br/centrais-de-conteudo/legislacao/instrucao-normativa"
+      ],
+      "consultas": [
+        "\"Portaria PRES/INSS\" when:30d",
+        "\"Instrução Normativa PRES/INSS\" when:30d"
+      ]
     }
   ],
   "max_por_grupo": 15

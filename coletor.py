@@ -164,7 +164,13 @@ def coletar_tudo() -> dict:
     }
     for grupo in config["grupos"]:
         print(f"Coletando: {grupo['titulo']}...")
-        noticias = coletar_grupo(grupo, max_por_grupo, bloqueio_global, fontes_bloqueadas)
+        if grupo.get("tipo") == "normas":
+            # Grupo especial: coleta no site oficial do INSS (ver normas.py).
+            # Import aqui dentro para evitar importação circular.
+            from normas import coletar_normas
+            noticias = coletar_normas(grupo, max_por_grupo, bloqueio_global)
+        else:
+            noticias = coletar_grupo(grupo, max_por_grupo, bloqueio_global, fontes_bloqueadas)
         print(f"  {len(noticias)} notícias encontradas")
         dados["grupos"].append({
             "id": grupo["id"],
