@@ -6,12 +6,16 @@ import re
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
 # Pasta onde este arquivo está (para os caminhos funcionarem de qualquer lugar)
 PASTA = Path(__file__).parent
+
+# Fuso de Brasília (UTC-3). Fixo no código porque o script roda na nuvem do
+# GitHub, cujo relógio é UTC — sem isso a hora sairia 3h adiantada.
+FUSO_BRASILIA = timezone(timedelta(hours=-3))
 
 # Endereço base da busca RSS do Google News (em português do Brasil)
 URL_BASE = "https://news.google.com/rss/search?q={consulta}&hl=pt-BR&gl=BR&ceid=BR:pt-419"
@@ -155,7 +159,7 @@ def coletar_tudo() -> dict:
     fontes_bloqueadas = {f.lower() for f in config.get("bloquear_fontes", [])}
 
     dados = {
-        "atualizado_em": datetime.now().isoformat(timespec="seconds"),
+        "atualizado_em": datetime.now(FUSO_BRASILIA).isoformat(timespec="seconds"),
         "grupos": [],
     }
     for grupo in config["grupos"]:

@@ -1,11 +1,14 @@
 # gerador.py — lê dados/noticias.json e gera a página site/index.html
 
 import json
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from html import escape
 from pathlib import Path
 
 PASTA = Path(__file__).parent
+
+# Fuso de Brasília (UTC-3) — as datas das notícias chegam em UTC
+FUSO_BRASILIA = timezone(timedelta(hours=-3))
 
 # Modelo da página. Os {marcadores} são preenchidos pelo Python.
 MODELO_PAGINA = """<!DOCTYPE html>
@@ -52,11 +55,14 @@ MODELO_PAGINA = """<!DOCTYPE html>
 
 
 def formatar_data(data_iso: str) -> str:
-    """Converte data ISO para o formato brasileiro (dd/mm/aaaa hh:mm)."""
+    """Converte data ISO para o formato brasileiro (dd/mm/aaaa hh:mm), no fuso de Brasília."""
     if not data_iso:
         return ""
     try:
-        return datetime.fromisoformat(data_iso).strftime("%d/%m/%Y %H:%M")
+        data = datetime.fromisoformat(data_iso)
+        if data.tzinfo is not None:
+            data = data.astimezone(FUSO_BRASILIA)
+        return data.strftime("%d/%m/%Y %H:%M")
     except ValueError:
         return data_iso
 
