@@ -4,11 +4,15 @@
 (atualiza sozinha todo dia às ~7h, horário de Brasília)
 
 Busca notícias no Google News (via RSS, sem precisar de chave de API) e gera uma
-página HTML com 3 grupos:
+página HTML com 4 seções (menu lateral, uma seção visível por vez):
 
 1. **INSS**
 2. **Pessoas com Deficiência — Brasil**
 3. **Pessoas com Deficiência — Cotia e Região** (cidades num raio de ~30km)
+4. **Portarias e Instruções Normativas** — coletadas direto do site oficial do
+   INSS (gov.br, ano atual + anterior), com número, data de publicação,
+   descrição e link para o texto oficial; o Google News complementa com
+   publicações do Diário Oficial
 
 ## Como usar
 
@@ -34,6 +38,7 @@ e depois abra `site\index.html` no navegador.
 |---|---|
 | `config.json` | Define os grupos, os termos de busca e o limite de notícias |
 | `coletor.py` | Busca as notícias no Google News e salva em `dados/noticias.json` |
+| `normas.py` | Coleta portarias e INs no site oficial do INSS (grupo `"tipo": "normas"`) |
 | `gerador.py` | Lê o JSON e gera a página `site/index.html` |
 | `atualizar.py` | Script principal — roda a coleta e a geração de uma vez |
 | `abrir.bat` | Atalho de clique duplo: atualiza e abre a página no navegador |
