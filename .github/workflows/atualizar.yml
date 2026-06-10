@@ -1,0 +1,41 @@
+# Automação do GitHub Actions: coleta as notícias na nuvem e publica a página
+# no GitHub Pages. Roda todo dia de manhã, sem depender do computador local.
+name: Atualizar notícias
+
+on:
+  schedule:
+    - cron: "0 10 * * *" # todo dia às 10:00 UTC = 07:00 de Brasília
+  workflow_dispatch: # permite rodar manualmente pelo site do GitHub
+  push:
+    branches: [main] # também atualiza quando o código mudar
+
+permissions:
+  pages: write # publicar no GitHub Pages
+  id-token: write # exigido pela etapa de publicação
+
+jobs:
+  atualizar-e-publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Coletar notícias e gerar a página
+        run: python atualizar.py
+
+      - name: Empacotar a pasta site/
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Publicar no GitHub Pages
+        id: publicar
+        uses: actions/deploy-pages@v4

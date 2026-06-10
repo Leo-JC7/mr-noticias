@@ -1,0 +1,80 @@
+{
+  "comentario": "bloquear_titulo_global: descarta a notícia se o título contiver um destes termos (clickbait). bloquear_fontes: descarta tudo destes portais. Os demais filtros ficam dentro de cada grupo.",
+  "bloquear_titulo_global": [
+    "veja como", "veja se", "veja o que", "veja quem", "veja datas",
+    "saiba como", "saiba se", "saiba o que", "saiba quem",
+    "confira", "descubra", "não perca", "você sabia",
+    "deveria ler", "deveriam ler", "precisa ler", "precisam ler",
+    "urgente:", "atenção:", "é hoje",
+    "ótima notícia", "boa notícia", "últimos dias"
+  ],
+  "bloquear_fontes": [],
+  "grupos": [
+    {
+      "id": "inss",
+      "titulo": "INSS",
+      "consultas": [
+        "INSS when:2d"
+      ]
+    },
+    {
+      "id": "pcd-brasil",
+      "titulo": "Pessoas com Deficiência — Brasil",
+      "consultas": [
+        "\"pessoas com deficiência\" Brasil when:2d",
+        "\"pessoa com deficiência\" direitos when:2d",
+        "\"pessoa com deficiência\" lei when:2d",
+        "acessibilidade inclusão when:2d"
+      ],
+      "palavras_relevantes": [
+        "deficiência", "deficiente", "deficientes", "pcd",
+        "inclusão", "inclusivo", "inclusiva",
+        "acessibilidade", "acessível", "acessíveis",
+        "libras", "braille", "autismo", "autista", "autistas", "tea",
+        "síndrome de down", "cadeirante", "cadeirantes", "cadeira de rodas",
+        "surdo", "surda", "surdos", "surdas", "surdez",
+        "cego", "cega", "cegos", "cegas", "cegueira", "baixa visão",
+        "mobilidade reduzida", "apae", "aacd", "bpc", "loas",
+        "capacitismo", "neurodivergente", "neurodiversidade"
+      ],
+      "bloquear_titulo": [
+        "show", "shows", "stand-up", "comedy", "festival", "festa", "balada"
+      ]
+    },
+    {
+      "id": "pcd-cotia-regiao",
+      "titulo": "Pessoas com Deficiência — Cotia e Região",
+      "consultas": [
+        "\"pessoa com deficiência\" (Cotia OR Itapevi OR Jandira OR Barueri OR Carapicuíba OR Osasco) when:30d",
+        "\"pessoa com deficiência\" (\"Embu das Artes\" OR \"Taboão da Serra\" OR \"Itapecerica da Serra\" OR \"Vargem Grande Paulista\") when:30d",
+        "\"pessoa com deficiência\" (\"Santana de Parnaíba\" OR \"Embu-Guaçu\" OR \"São Roque\" OR Ibiúna) when:30d",
+        "PCD (Cotia OR Itapevi OR Barueri OR Carapicuíba OR Osasco OR \"Embu das Artes\") when:30d",
+        "(acessibilidade OR inclusão OR autismo OR libras) (Cotia OR Itapevi OR Barueri OR Carapicuíba OR Osasco) when:30d",
+        "\"pessoas com deficiência\" Cotia when:30d"
+      ],
+      "filtro_titulo": [
+        "cotia", "caucaia do alto",
+        "itapevi", "jandira", "barueri", "alphaville", "carapicuíba", "osasco",
+        "embu das artes", "embu-guaçu", "embu guaçu",
+        "taboão da serra", "itapecerica da serra",
+        "vargem grande paulista", "santana de parnaíba",
+        "pirapora do bom jesus", "são roque", "ibiúna"
+      ],
+      "palavras_relevantes": [
+        "deficiência", "deficiente", "deficientes", "pcd",
+        "inclusão", "inclusivo", "inclusiva",
+        "acessibilidade", "acessível", "acessíveis",
+        "libras", "braille", "autismo", "autista", "autistas", "tea",
+        "síndrome de down", "cadeirante", "cadeirantes", "cadeira de rodas",
+        "surdo", "surda", "surdos", "surdas", "surdez",
+        "cego", "cega", "cegos", "cegas", "cegueira", "baixa visão",
+        "mobilidade reduzida", "apae", "aacd", "bpc", "loas",
+        "capacitismo", "neurodivergente", "neurodiversidade"
+      ],
+      "bloquear_titulo": [
+        "show", "shows", "stand-up", "comedy", "festival", "festa", "balada"
+      ]
+    }
+  ],
+  "max_por_grupo": 15
+}
