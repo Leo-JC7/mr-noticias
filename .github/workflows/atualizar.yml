@@ -21,10 +21,10 @@ jobs:
       url: ${{ steps.publicar.outputs.page_url }}
     steps:
       - name: Baixar o código do repositório
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Instalar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -32,10 +32,10 @@ jobs:
         run: python atualizar.py
 
       - name: Empacotar a pasta site/
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
       - name: Publicar no GitHub Pages
         id: publicar
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

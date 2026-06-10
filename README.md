@@ -1,5 +1,8 @@
 # MR Notícias — Agregador Diário
 
+**Página da equipe: https://leo-jc7.github.io/mr-noticias/**
+(atualiza sozinha todo dia às ~7h, horário de Brasília)
+
 Busca notícias no Google News (via RSS, sem precisar de chave de API) e gera uma
 página HTML com 3 grupos:
 
@@ -66,16 +69,27 @@ O coletor também descarta automaticamente notícias **quase repetidas**
 
 Após editar, rode `python atualizar.py` (ou o atalho) e veja o resultado.
 
-## Atualização automática diária (opcional)
+## Publicação automática (GitHub Pages)
 
-Para o Windows rodar o script todo dia às 7h, execute **uma vez** no PowerShell:
+A página da equipe é publicada pelo GitHub Actions — definido em
+`.github/workflows/atualizar.yml`:
+
+- **Todo dia às 10:00 UTC (~7h de Brasília)** o GitHub roda a coleta na nuvem
+  e republica a página. Não depende de nenhum computador ligado.
+- **A cada `git push`** na branch `main` ela também é republicada — ou seja,
+  mudou um filtro no `config.json`, é só commitar e enviar que o site atualiza.
+- **Atualização manual**: em github.com/Leo-JC7/mr-noticias → aba *Actions* →
+  *Atualizar notícias* → botão *Run workflow*.
+
+Para mudar o horário, edite a linha `cron:` do workflow (sempre em UTC).
+
+Fluxo para publicar uma alteração:
 
 ```powershell
-schtasks /create /tn "MR Noticias" /sc daily /st 07:00 `
-  /tr "python \"D:\MR_Notícias\agregador_noticias\atualizar.py\""
+git add -A
+git commit -m "Descreva a mudança aqui"
+git push
 ```
-
-Para remover o agendamento: `schtasks /delete /tn "MR Noticias"`
 
 ## Observações
 
