@@ -4,7 +4,11 @@ name: Atualizar notícias
 
 on:
   schedule:
-    - cron: "0 10 * * *" # todo dia às 10:00 UTC = 07:00 de Brasília
+    # Dois horários por dia (em UTC; Brasília = UTC-3). Minutos "quebrados"
+    # de propósito: às horas cheias o GitHub fica sobrecarregado e pode
+    # atrasar ou pular o agendamento.
+    - cron: "23 10 * * *" # ~07h23 de Brasília
+    - cron: "23 15 * * *" # ~12h23 de Brasília (rede de segurança)
   workflow_dispatch: # permite rodar manualmente pelo site do GitHub
   push:
     branches: [main] # também atualiza quando o código mudar
