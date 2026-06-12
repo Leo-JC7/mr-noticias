@@ -4,11 +4,10 @@ name: Atualizar notícias
 
 on:
   schedule:
-    # Dois horários por dia (em UTC; Brasília = UTC-3). Minutos "quebrados"
-    # de propósito: às horas cheias o GitHub fica sobrecarregado e pode
-    # atrasar ou pular o agendamento.
-    - cron: "23 10 * * *" # ~07h23 de Brasília
-    - cron: "23 15 * * *" # ~12h23 de Brasília (rede de segurança)
+    # O agendador do GitHub é "melhor esforço": atrasa horas ou pula rodadas.
+    # Por isso agendamos a cada 2h durante o dia — mesmo que ele pule
+    # algumas, a página se mantém fresca. Horários em UTC (Brasília = UTC-3).
+    - cron: "23 9-21/2 * * *" # 9h23 às 21h23 UTC = 6h23 às 18h23 de Brasília
   workflow_dispatch: # permite rodar manualmente pelo site do GitHub
   push:
     branches: [main] # também atualiza quando o código mudar

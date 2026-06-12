@@ -1,7 +1,7 @@
 # MR Notícias — Agregador Diário
 
 **Página da equipe: https://leo-jc7.github.io/mr-noticias/**
-(atualiza sozinha todo dia às ~7h, horário de Brasília)
+(atualiza sozinha várias vezes ao dia, das ~6h às ~19h de Brasília)
 
 Busca notícias no Google News (via RSS, sem precisar de chave de API) e gera uma
 página HTML com 4 seções (menu lateral, uma seção visível por vez):
@@ -79,8 +79,10 @@ Após editar, rode `python atualizar.py` (ou o atalho) e veja o resultado.
 A página da equipe é publicada pelo GitHub Actions — definido em
 `.github/workflows/atualizar.yml`:
 
-- **Todo dia às 10:00 UTC (~7h de Brasília)** o GitHub roda a coleta na nuvem
-  e republica a página. Não depende de nenhum computador ligado.
+- **A cada 2 horas durante o dia (6h23–18h23 de Brasília)** o GitHub roda a
+  coleta na nuvem e republica a página. Não depende de nenhum computador
+  ligado. São vários horários porque o agendador do GitHub é "melhor
+  esforço" — atrasa ou pula rodadas em horários de pico.
 - **A cada `git push`** na branch `main` ela também é republicada — ou seja,
   mudou um filtro no `config.json`, é só commitar e enviar que o site atualiza.
 - **Atualização manual**: em github.com/Leo-JC7/mr-noticias → aba *Actions* →
